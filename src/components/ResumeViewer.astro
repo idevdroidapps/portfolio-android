@@ -63,6 +63,15 @@ const { resumeUrl, previewUrl } = Astro.props;
 		box-shadow: var(--elevation-2);
 		background-color: var(--md-surface-container-low);
 		border: 1px solid var(--md-outline-variant);
+		display: flex;
+		justify-content: center;
+	}
+
+	.preview-iframe {
+		width: 100%;
+		height: 100%;
+		border: none;
+		display: block;
 	}
 
 	.pdf-object {
