@@ -1,0 +1,97 @@
+---
+interface Props {
+	resumeUrl: string;
+}
+
+const { resumeUrl } = Astro.props;
+---
+
+<div class="resume-container">
+	<div class="resume-header">
+		<a href={resumeUrl} download class="download-button">
+			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path>
+				<polyline points="7 10 12 15 17 10"></polyline>
+				<line x1="12" y1="15" x2="12" y2="3"></line>
+			</svg>
+			Download CV
+		</a>
+	</div>
+	<div class="resume-frame-wrapper">
+		<object
+			data={resumeUrl}
+			type="application/pdf"
+			width="100%"
+			height="100%"
+			class="resume-object"
+		>
+			<div class="fallback">
+				<p>It looks like your browser doesn't support embedded PDFs.</p>
+				<a href={resumeUrl} class="download-button">View CV PDF</a>
+			</div>
+		</object>
+	</div>
+</div>
+
+<style>
+	.resume-container {
+		display: flex;
+		flex-direction: column;
+		gap: 1.5rem;
+		width: 100%;
+		height: 120vh;
+		margin: 2rem 0;
+	}
+
+	.resume-header {
+		display: flex;
+		justify-content: flex-end;
+	}
+
+	.download-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5rem;
+		padding: 0.75rem 1.5rem;
+		background-color: var(--md-primary);
+		color: var(--md-on-primary);
+		text-decoration: none;
+		border-radius: 28px; /* Material 3 style */
+		font-weight: 500;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+		box-shadow: var(--elevation-1);
+	}
+
+	.download-button:hover {
+		transform: translateY(-2px);
+		box-shadow: var(--elevation-2);
+		background-color: var(--md-primary);
+		filter: brightness(1.1);
+		color: var(--md-on-primary);
+	}
+
+	.resume-frame-wrapper {
+		flex: 1;
+		border-radius: 16px;
+		overflow: hidden;
+		box-shadow: var(--elevation-2);
+		border: 1px solid var(--md-outline-variant);
+		background: white;
+	}
+
+	.resume-object {
+		border: none;
+	}
+
+	.fallback {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		padding: 2rem;
+		text-align: center;
+		background: var(--md-surface-variant);
+		color: var(--md-on-surface-variant);
+	}
+</style>

@@ -1,19 +1,29 @@
 ---
 import Layout from '../layouts/ProjectPost.astro';
+import ResumeViewer from '../components/ResumeViewer.astro';
+
+const resumeUrl = '/james_campbell_android_resume.pdf';
 ---
 
 <Layout
 	title="Resume"
-	description="My Professional Resume"
+	description="My Professional Resume - James Campbell"
 	pubDate={new Date()}
 >
-	<h2>Experience</h2>
-	<p>
-		Details of my professional experience will go here.
-	</p>
-
-	<h2>Education</h2>
-	<p>
-		My educational background.
-	</p>
+	<div class="resume-wrapper">
+		<ResumeViewer resumeUrl={resumeUrl} />
+	</div>
 </Layout>
+
+<style is:global>
+	/* Override ProjectPost layout restrictions for the resume page */
+	.prose:has(.resume-wrapper) {
+		width: 1000px;
+		max-width: calc(100% - 2em);
+	}
+
+	/* Hide the default title and divider for the resume page */
+	.prose:has(.resume-wrapper) .title {
+		display: none;
+	}
+</style>
