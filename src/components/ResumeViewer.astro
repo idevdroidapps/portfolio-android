@@ -7,27 +7,41 @@ const { resumeUrl } = Astro.props;
 ---
 
 <div class="resume-container">
-	<div class="resume-header">
-		<a href={resumeUrl} download class="download-button">
-			<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-				<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v4"></path>
-				<polyline points="7 10 12 15 17 10"></polyline>
-				<line x1="12" y1="15" x2="12" y2="3"></line>
-			</svg>
+	<div class="viewer-actions">
+		<a href={resumeUrl} download class="button primary download-btn">
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				width="20"
+				height="20"
+				viewBox="0 0 24 24"
+				fill="none"
+				stroke="currentColor"
+				stroke-width="2"
+				stroke-linecap="round"
+				stroke-linejoin="round"
+				><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline
+					points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg
+			>
 			Download CV
 		</a>
 	</div>
-	<div class="resume-frame-wrapper">
-		<object
-			data={resumeUrl}
-			type="application/pdf"
-			width="100%"
-			height="100%"
-			class="resume-object"
-		>
+
+	<div class="resume-viewer">
+		<!-- Primary Viewer: Native Browser Support -->
+		<object data={resumeUrl} type="application/pdf" class="pdf-object">
+			<!-- Mobile/Fallback Viewer: Google Docs Preview -->
+			<iframe
+				src={`https://docs.google.com/gview?url=${new URL(resumeUrl, Astro.url.origin).href}&embedded=true`}
+				style="width:100%; height:100%;"
+				frameborder="0"
+				class="mobile-iframe"></iframe>
+
+			<!-- Ultimate Fallback -->
 			<div class="fallback">
-				<p>It looks like your browser doesn't support embedded PDFs.</p>
-				<a href={resumeUrl} class="download-button">View CV PDF</a>
+				<div class="fallback-content">
+					<p>Your browser doesn't support embedded PDFs, but you can still view it below.</p>
+					<a href={resumeUrl} class="button secondary">Open PDF in New Tab</a>
+				</div>
 			</div>
 		</object>
 	</div>
@@ -39,59 +53,81 @@ const { resumeUrl } = Astro.props;
 		flex-direction: column;
 		gap: 1.5rem;
 		width: 100%;
-		height: 120vh;
-		margin: 2rem 0;
 	}
 
-	.resume-header {
+	.viewer-actions {
 		display: flex;
 		justify-content: flex-end;
 	}
 
-	.download-button {
-		display: inline-flex;
-		align-items: center;
+	.download-btn {
 		gap: 0.5rem;
-		padding: 0.75rem 1.5rem;
-		background-color: var(--md-primary);
-		color: var(--md-on-primary);
-		text-decoration: none;
-		border-radius: 28px; /* Material 3 style */
-		font-weight: 500;
-		transition: transform 0.2s ease, box-shadow 0.2s ease;
-		box-shadow: var(--elevation-1);
 	}
 
-	.download-button:hover {
-		transform: translateY(-2px);
-		box-shadow: var(--elevation-2);
-		background-color: var(--md-primary);
-		filter: brightness(1.1);
-		color: var(--md-on-primary);
-	}
-
-	.resume-frame-wrapper {
-		flex: 1;
-		border-radius: 16px;
+	.resume-viewer {
+		width: 100%;
+		height: 120vh;
+		border-radius: 12px;
 		overflow: hidden;
 		box-shadow: var(--elevation-2);
+		background-color: var(--md-surface-container-low);
 		border: 1px solid var(--md-outline-variant);
-		background: white;
 	}
 
-	.resume-object {
-		border: none;
+	.pdf-object {
+		width: 100%;
+		height: 100%;
+		display: block;
 	}
 
 	.fallback {
 		display: flex;
-		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		height: 100%;
 		padding: 2rem;
 		text-align: center;
-		background: var(--md-surface-variant);
+		background-color: var(--md-surface-container-high);
+	}
+
+	.fallback-content p {
+		margin-bottom: 1.5rem;
 		color: var(--md-on-surface-variant);
+	}
+
+	.button {
+		padding: 0.75rem 1.5rem;
+		border-radius: 100px;
+		font-weight: 500;
+		text-decoration: none;
+		transition: all 0.2s ease;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+	}
+
+	.button.primary {
+		background-color: var(--md-primary);
+		color: var(--md-on-primary);
+	}
+
+	.button.secondary {
+		background-color: var(--md-surface-variant);
+		color: var(--md-on-surface-variant);
+		border: 1px solid var(--md-outline);
+	}
+
+	.button:hover {
+		filter: brightness(1.1);
+		transform: translateY(-1px);
+		box-shadow: var(--elevation-1);
+	}
+
+	/* Adjust height for smaller mobile screens */
+	@media (max-width: 720px) {
+		.resume-viewer {
+			height: 80vh;
+		}
 	}
 </style>
