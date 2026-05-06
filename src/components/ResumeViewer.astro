@@ -124,10 +124,19 @@ const { resumeUrl, previewUrl } = Astro.props;
 		box-shadow: var(--elevation-1);
 	}
 
-	/* Adjust height for smaller mobile screens */
+	/* Adjust for smaller mobile screens */
 	@media (max-width: 720px) {
 		.resume-viewer {
 			height: 80vh;
+			border-radius: 0;
+			border-left: none;
+			border-right: none;
+		}
+		.resume-container {
+			gap: 1rem;
+		}
+		.viewer-actions {
+			padding: 0 1rem;
 		}
 	}
 </style>

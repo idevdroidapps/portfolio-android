@@ -26,4 +26,15 @@ const previewUrl = 'https://docs.google.com/gview?url=https://drive.google.com/u
 	.prose:has(.resume-wrapper) .title {
 		display: none;
 	}
+
+	@media (max-width: 720px) {
+		main:has(.resume-wrapper) {
+			padding-left: 0;
+			padding-right: 0;
+			max-width: 100%;
+		}
+		.resume-wrapper {
+			padding: 0;
+		}
+	}
 </style>
