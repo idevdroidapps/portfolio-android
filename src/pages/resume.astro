@@ -3,6 +3,7 @@ import Layout from '../layouts/ProjectPost.astro';
 import ResumeViewer from '../components/ResumeViewer.astro';
 
 const resumeUrl = '/james_campbell_android_resume.pdf';
+const previewUrl = 'https://drive.google.com/file/d/1J4UtFU7LwjpAhgkxyQ6TSx4zoplQ80LN/preview';
 ---
 
 <Layout
@@ -10,7 +11,7 @@ const resumeUrl = '/james_campbell_android_resume.pdf';
 	description="My Professional Resume - James Campbell"
 >
 	<div class="resume-wrapper">
-		<ResumeViewer resumeUrl={resumeUrl} />
+		<ResumeViewer resumeUrl={resumeUrl} previewUrl={previewUrl} />
 	</div>
 </Layout>
 

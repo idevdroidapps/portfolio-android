@@ -1,9 +1,10 @@
 ---
 interface Props {
 	resumeUrl: string;
+	previewUrl?: string;
 }
 
-const { resumeUrl } = Astro.props;
+const { resumeUrl, previewUrl } = Astro.props;
 ---
 
 <div class="resume-container">
@@ -27,23 +28,13 @@ const { resumeUrl } = Astro.props;
 	</div>
 
 	<div class="resume-viewer">
-		<!-- Primary Viewer: Native Browser Support -->
-		<object data={resumeUrl} type="application/pdf" class="pdf-object">
-			<!-- Mobile/Fallback Viewer: Google Docs Preview -->
-			<iframe
-				src={`https://docs.google.com/gview?url=${new URL(resumeUrl, Astro.url.origin).href}&embedded=true`}
-				style="width:100%; height:100%;"
-				frameborder="0"
-				class="mobile-iframe"></iframe>
-
-			<!-- Ultimate Fallback -->
-			<div class="fallback">
-				<div class="fallback-content">
-					<p>Your browser doesn't support embedded PDFs, but you can still view it below.</p>
-					<a href={resumeUrl} class="button secondary">Open PDF in New Tab</a>
-				</div>
-			</div>
-		</object>
+		<!-- Use the public previewUrl if available, otherwise fallback to local resumeUrl -->
+		<iframe
+			src={previewUrl || resumeUrl}
+			style="width:100%; height:100%;"
+			frameborder="0"
+			allow="autoplay"
+			class="preview-iframe"></iframe>
 	</div>
 </div>
 
