@@ -65,6 +65,11 @@ import { SITE_TITLE } from '../consts';
 		text-decoration: none;
 		border-bottom-color: var(--accent);
 	}
+	.internal-links {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
 	.social-links,
 	.social-links a {
 		display: flex;
@@ -72,6 +77,17 @@ import { SITE_TITLE } from '../consts';
 	@media (max-width: 720px) {
 		.social-links {
 			display: none;
+		}
+		nav {
+			flex-direction: column;
+			gap: 0.5rem;
+			padding: 1rem 0;
+		}
+		.internal-links {
+			gap: 0.5rem;
+		}
+		nav a {
+			padding: 0.5em;
 		}
 	}
 </style>

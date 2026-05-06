@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
+*, *::before, *::after {
+	box-sizing: border-box;
+}
+
 :root {
 	/* Material Design 3 Light Theme Colors */
 	--md-primary: #6750a4;
@@ -46,11 +50,12 @@ body {
 	font-size: 16px;
 	line-height: 1.5;
 	-webkit-font-smoothing: antialiased;
+	overflow-x: hidden;
 }
 
 main {
-	width: 800px;
-	max-width: calc(100% - 32px);
+	width: 100%;
+	max-width: 800px;
 	margin: auto;
 	padding: 48px 16px;
 }
