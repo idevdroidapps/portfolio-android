@@ -61,10 +61,11 @@ const { resumeUrl, previewUrl } = Astro.props;
 		border-radius: 12px;
 		overflow: hidden;
 		box-shadow: var(--elevation-2);
-		background-color: var(--md-surface-container-low);
+		background-color: #202124;
 		border: 1px solid var(--md-outline-variant);
 		display: flex;
-		justify-content: center;
+		flex-direction: column;
+		padding-top: 3rem;
 	}
 
 	.preview-iframe {
@@ -131,6 +132,7 @@ const { resumeUrl, previewUrl } = Astro.props;
 			border-radius: 0;
 			border-left: none;
 			border-right: none;
+			padding-top: 1rem;
 		}
 		.resume-container {
 			gap: 1rem;
